@@ -30,7 +30,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, ViewTreeObserver.OnGlobalLayoutListener, TextWatcher {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, ViewTreeObserver.OnGlobalLayoutListener, TextWatcher {
 
     private String TAG = "ifu25";
 
@@ -148,11 +148,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_login_register:
                 //注册
-                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
             case R.id.tv_login_forget_pwd:
                 //忘记密码
-                startActivity(new Intent(MainActivity.this, ForgetPwdActivity.class));
+                startActivity(new Intent(LoginActivity.this, ForgetPwdActivity.class));
                 break;
             case R.id.ll_login_layer:
             case R.id.ll_login_pull:
@@ -429,14 +429,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Response response = client.newCall(request1).execute();
                     String responseData = response.body().string();
                     if ("1".equals(responseData)){
-                        Intent intent =new Intent(MainActivity.this, IndexActivity.class);
+                        Intent intent =new Intent(LoginActivity.this, IndexActivity.class);
                         startActivity(intent);
                     }
                     if ("0".equals(responseData)){
-                        Toast.makeText(MainActivity.this,"账号或密码错误！",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"账号或密码错误！",Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(MainActivity.this,responseData,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,responseData,Toast.LENGTH_SHORT).show();
                     }
                     Log.d("123456", "run: "+responseData);
                 } catch (Exception e) {
@@ -454,7 +454,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (null != mToast) {
             mToast.setText(msg);
         } else {
-            mToast = Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT);
         }
 
         mToast.show();

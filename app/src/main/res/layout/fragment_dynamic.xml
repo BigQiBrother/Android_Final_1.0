@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.IndexActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lv_dynamic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_alpha_128"
+                android:divider="@null"
+                android:scrollbars="none">
+
+            </ListView>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_release"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="bottom|right"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="24dp"
+                android:src="@drawable/btn_send"/>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

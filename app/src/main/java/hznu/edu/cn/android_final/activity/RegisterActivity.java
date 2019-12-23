@@ -1,20 +1,14 @@
 package hznu.edu.cn.android_final.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -23,10 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import javax.crypto.spec.IvParameterSpec;
 
 import hznu.edu.cn.android_final.R;
 import okhttp3.FormBody;
@@ -59,12 +49,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private LinearLayout ll_register_phone;
     private ImageView iv_register_phone_del;
 
-    private EditText et_register_auth_code; // 获取验证码
+    private EditText et_register_vercode; // 获取验证码
     private LinearLayout ll_register_sms_code;
     private TextView tv_register_sms_call;
     private CheckBox cb_protocol;
 
-    //全局Toast
+    //全局变量
+    private String response_vercode;
     private Toast mToast;
 
     private int mLogoHeight;
@@ -115,9 +106,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         // 手机、验证码
 
         et_register_phone=findViewById(R.id.et_register_phone);
-        et_register_auth_code=findViewById(R.id.et_register_auth_code);
+        et_register_vercode=findViewById(R.id.et_register_vercode);
         iv_register_phone_del=findViewById(R.id.iv_register_phone_del);
-
+        tv_register_sms_call=findViewById(R.id.tv_register_sms_call);
         //提交、注册
         bt_register_submit = findViewById(R.id.bt_register_submit);
 
@@ -130,10 +121,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         et_register_password.setOnClickListener(this);
         et_register_password_twice.setOnClickListener(this);
         et_register_phone.setOnClickListener(this);
-        et_register_auth_code.setOnClickListener(this);
+        et_register_vercode.setOnClickListener(this);
 
         iv_register_password_del.setOnClickListener(this);
         iv_register_password_twice_del.setOnClickListener(this);
+        iv_register_phone_del.setOnClickListener(this);
+        tv_register_sms_call.setOnClickListener(this);
 
         //注册焦点事件
         //mLayBackBar.getViewTreeObserver().addOnGlobalLayoutListener(this);
@@ -141,14 +134,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         et_register_password.setOnFocusChangeListener(this);
         et_register_password_twice.setOnFocusChangeListener(this);
         et_register_phone.setOnFocusChangeListener(this);
-        et_register_auth_code.setOnFocusChangeListener(this);
+        et_register_vercode.setOnFocusChangeListener(this);
         // 注册文本改变事件
 
         et_register_password.addTextChangedListener(this);
         mEtLoginUsername.addTextChangedListener(this);
         et_register_password_twice.addTextChangedListener(this);
         et_register_phone.addTextChangedListener(this);
-        et_register_auth_code.addTextChangedListener(this);
+        et_register_vercode.addTextChangedListener(this);
 
     }
 
@@ -165,7 +158,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                  et_register_password.clearFocus();
                  et_register_password_twice.clearFocus();
                  et_register_phone.clearFocus();
-                 et_register_auth_code.clearFocus();
+                 et_register_vercode.clearFocus();
                  mEtLoginUsername.setFocusableInTouchMode(true);
                  mEtLoginUsername.requestFocus();
                  break;
@@ -173,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                  mEtLoginUsername.clearFocus();
                  et_register_password_twice.clearFocus();
                  et_register_phone.clearFocus();
-                 et_register_auth_code.clearFocus();
+                 et_register_vercode.clearFocus();
                  et_register_password.setFocusableInTouchMode(true);
                  et_register_password.requestFocus();
                  break;
@@ -181,23 +174,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                  mEtLoginUsername.clearFocus();
                  et_register_password.clearFocus();
                  et_register_phone.clearFocus();
-                 et_register_auth_code.clearFocus();
+                 et_register_vercode.clearFocus();
                  et_register_password_twice.setFocusableInTouchMode(true);
                  et_register_password_twice.requestFocus();
              case R.id.et_register_phone:
                  mEtLoginUsername.clearFocus();
                  et_register_password.clearFocus();
                  et_register_password_twice.clearFocus();
-                 et_register_auth_code.clearFocus();
+                 et_register_vercode.clearFocus();
                  et_register_phone.setFocusableInTouchMode(true);
                  et_register_phone.requestFocus();
-             case R.id.et_register_auth_code:
+             case R.id.et_register_vercode:
                  mEtLoginUsername.clearFocus();
                  et_register_password.clearFocus();
                  et_register_password_twice.clearFocus();
                  et_register_phone.clearFocus();
-                 et_register_auth_code.setFocusableInTouchMode(true);
-                 et_register_auth_code.requestFocus();
+                 et_register_vercode.setFocusableInTouchMode(true);
+                 et_register_vercode.requestFocus();
              case R.id.iv_login_username_del:
                  //清空用户名
                  mEtLoginUsername.setText(null);
@@ -213,6 +206,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
              case R.id.iv_register_phone_del:
                  //清空手机
                  et_register_phone.setText(null);
+                 break;
+                 // 发送验证码
+             case R.id.tv_register_sms_call:
+                 String phone = et_register_phone.getText().toString().trim();
+                 String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";// "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位
+                 if(!phone.matches(telRegex)){
+                     showToast("请输入正确的手机号！");
+                     et_register_phone.setText(null);
+                 }
+                 else{
+                     Log.d("phone", "onClick: "+phone);
+                     SendSms(phone);
+                 }
+
                  break;
              case R.id.bt_register_submit:
                  //注册
@@ -241,9 +248,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     //焦点改变
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        Log.d("123", "onFocusChange: 123132132");
         int id = v.getId();
-        Log.d("id", "onFocusChange: "+id);
         if (id == R.id.et_login_username) {
             if (hasFocus) {
                 mLlLoginUsername.setActivated(true);
@@ -265,7 +270,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         else if(id==R.id.et_register_password_twice){
             if (hasFocus) {
-                Log.d("123", "onFocusChange: password_twice");
                 mLlLoginpassword.setActivated(false);
                 mLlLoginUsername.setActivated(false);
                 ll_register_two_password.setActivated(true);
@@ -275,7 +279,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         else if(id==R.id.et_register_phone){
             if (hasFocus) {
-                Log.d("123", "onFocusChange: phone");
                 mLlLoginpassword.setActivated(false);
                 mLlLoginUsername.setActivated(false);
                 ll_register_two_password.setActivated(false);
@@ -283,9 +286,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 ll_register_sms_code.setActivated(false);
             }
         }
-        else if(id==R.id.et_register_auth_code){
+        else if(id==R.id.et_register_vercode){
             if (hasFocus) {
-                Log.d("123", "onFocusChange: code");
                 mLlLoginpassword.setActivated(false);
                 mLlLoginUsername.setActivated(false);
                 ll_register_two_password.setActivated(false);
@@ -353,43 +355,78 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String password = et_register_password.getText().toString().trim();
         String password_twice=et_register_password_twice.getText().toString().trim();
         String phone=et_register_phone.getText().toString().trim();
-        String auth_code=et_register_auth_code.getText().toString().trim();
+        String vercode=et_register_vercode.getText().toString().trim();
         if(TextUtils.isEmpty(username)){
             showToast("用户名不能为空！");
         }
         else if(TextUtils.isEmpty(password)){
             showToast("密码不能为空！");
         }
-        else if(TextUtils.isEmpty(password_twice)){
-            showToast("密码不能为空！");
+        else if(!password.equals(password_twice)){
+            showToast("2次密码不相同！");
+        }
+        else if(TextUtils.isEmpty(vercode)){
+            showToast("验证码不能为空");
+        }
+        else if(!response_vercode.equals(vercode)){
+            showToast("请输入正确的验证码！");
         }
         else{
-            sendRequestWithOkHttp(username,password);
+            sendRequestWithOkHttp_for_login(username,password,phone,vercode);
         }
     }
 
-
     // 调用servlet发送短信验证码
-    private void sendRequestWithOkHttp(final String username, final String password) {
+    private void SendSms(final String phone) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    Looper.prepare();
                     OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody=new FormBody.Builder().add("username",username) .add("password",password).build();
-                    Request request1=new Request.Builder().url("http://10.0.2.2:8888/JSP_Final/Login_Servlet").post(requestBody).build();
+                    RequestBody requestBody=new FormBody.Builder().add("phone",phone).build();
+                    Request request1=new Request.Builder().url("http://10.0.2.2:8888/JSP_Final/SendSms_Servlet").post(requestBody).build();
+                    Response response = client.newCall(request1).execute();
+                    String response_vercode = response.body().string();
+
+                    if(!"".equals(response_vercode)){
+                        Toast.makeText(RegisterActivity.this,"验证码发送成功！",Toast.LENGTH_SHORT).show();
+                    }
+                    Looper.loop();
+                    
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    // 调用servlet验证登录
+    private void sendRequestWithOkHttp_for_login(final String username, final String password, final String phone, final String vercode) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Looper.prepare();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody=new FormBody.Builder().add("username",username) .add("password",password).add("phone",phone).add("vercode",vercode).build();
+                    Request request1=new Request.Builder().url("http://10.0.2.2:8888/JSP_Final/Register_Servlet").post(requestBody).build();
                     Response response = client.newCall(request1).execute();
                     String responseData = response.body().string();
-                    if ("1".equals(responseData)){
-                        Intent intent =new Intent(RegisterActivity.this, IndexActivity.class);
+                    if ("existed".equals(responseData)){
+                        Toast.makeText(RegisterActivity.this,"用户名已存在！",Toast.LENGTH_SHORT).show();
+
+                    }
+                    else if("true".equals(responseData)){
+                        Toast.makeText(RegisterActivity.this,"注册成功!返回登录界面！",Toast.LENGTH_SHORT).show();
+                        Intent intent =new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
-                    if ("0".equals(responseData)){
-                        Toast.makeText(RegisterActivity.this,"账号或密码错误！",Toast.LENGTH_SHORT).show();
-                    }
                     else{
-                        Toast.makeText(RegisterActivity.this,responseData,Toast.LENGTH_SHORT).show();
+                        Log.d("error", "run: "+responseData);
                     }
+                    Looper.loop();
                     Log.d("123456", "run: "+responseData);
                 } catch (Exception e) {
                     e.printStackTrace();

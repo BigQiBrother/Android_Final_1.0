@@ -3,18 +3,24 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="red">#FF0000</color>
+    <color name="dark_red">#d81e06</color>
 
     <!-- 常用颜色值 -->
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="black_alpha_128">#80000000</color>
     <color name="list_item_background_pressed">#FCFCFC</color>
+        <color name="bottom_bar_click">#cca658</color>
+    <color name="bottom_bar_unclick">#757575</color>
 
     <!-- 下拉刷新时，颜色值 -->
     <color name="swiperefresh_color4">#ffaa66cc</color>
 
     <!--  created by  fei -->
     <color name="text_secondary_color">#9d9d9d</color>
+
+    <color name="listitem_visited_color">#B0B0B0</color>
 
     <!-- 新版登录模块-->
     <color name="login_line_color">#dededf</color>
@@ -25,6 +31,8 @@
     <color name="account_lock_font_color">#FF68997C</color>
     <color name="account_input_color">#c9c9c9</color>
     <color name="account_pressed_true">#14b94d</color>
+
+    <color name="raiders_btn">#F8F8F8</color>
 
     <color name="bg_press">#ebebeb</color>\
     <color name="bg_press_material">#d4d4d4</color>

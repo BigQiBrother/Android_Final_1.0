@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sc_raiders"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.IndexActivity"
+    android:orientation="vertical"
+    android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#F8F8F8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:contentDescription="@null"
+                android:src="@drawable/search" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="15"
+                android:focusable="true"
+                android:hint="搜索英雄"
+                android:imeOptions="actionDone"
+                android:inputType="textPhonetic"
+                android:lines="1"
+                android:maxLines="1"
+                android:minLines="1"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@color/black_alpha_128"
+                android:textColorHint="@color/login_line_color"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/font_16" />
+
+            <ImageView
+                android:id="@+id/iv_do_search"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                android:src="@drawable/search"  />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/_xpopup_list_divider"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_all"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textColor="@color/account_pressed_true"
+                android:background="@color/white"
+                android:text="综合排名"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/_xpopup_list_divider"></View>
+
+            <Button
+                android:id="@+id/btn_winrate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="胜率"
+                android:textColor="@color/black_alpha_128"
+                android:background="#F8F8F8"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/_xpopup_list_divider"></View>
+            <Button
+                android:id="@+id/btn_appearancerate"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/black_alpha_128"
+                android:layout_height="match_parent"
+                android:background="#F8F8F8"
+                android:text="登场率"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/_xpopup_list_divider"></View>
+
+            <Button
+                android:id="@+id/btn_banrate"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="禁用率"
+                android:background="#F8F8F8"
+                android:textColor="@color/black_alpha_128"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/_xpopup_list_divider"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/version"/>
+                <TextView
+                    android:id="@+id/tv_news_source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black_alpha_128"
+                    android:textSize="@dimen/font_12"
+                    android:text="VER9.24版本"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/paiming"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"/>
+                    <TextView
+                        android:id="@+id/tv_news_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/black_alpha_128"
+                        android:gravity="right"
+                        android:layout_marginRight="15dp"
+                        android:textSize="@dimen/font_12"
+                        android:text="综合排名"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/_xpopup_list_divider"></View>
+
+        <hznu.edu.cn.android_final.ui.NoScrollListView
+            android:id="@+id/lv_raiders"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </hznu.edu.cn.android_final.ui.NoScrollListView>
+
+    </LinearLayout>
+</ScrollView>

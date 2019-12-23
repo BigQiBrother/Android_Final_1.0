@@ -1,0 +1,240 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".activity.RaidersHero_Activity">
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/news_in_top_shadow">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/tx_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginTop="10px"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:text="无极剑圣"
+            android:textColor="@color/bottom_bar_click"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/more"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/tv_hero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/hero_datou" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp">
+        <View
+            android:layout_width="5dp"
+            android:layout_height="25dp"
+            android:background="@color/bottom_bar_click"></View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="趋势"
+            android:textSize="@dimen/font_18"
+            android:textColor="#000"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ll_winrate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tx_winrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_16"
+                android:textColor="@color/account_pressed_true"
+                android:gravity="center_horizontal"
+                android:text="胜率"/>
+
+            <View
+                android:id="@+id/view_winrate"
+                android:layout_width="15dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="62dp"
+                android:gravity="center_horizontal"
+                android:background="@color/account_pressed_true"></View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_appearancerate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tx_appearancerate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/font_16"
+                android:textColor="@color/black_alpha_128"
+                android:text="登场率"/>
+
+            <View
+                android:id="@+id/view_appearancerate"
+                android:layout_width="15dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="62dp"
+                android:gravity="center_horizontal"
+                android:visibility="invisible"
+                android:background="@color/account_pressed_true"></View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_banrate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tx_banrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/font_16"
+                android:textColor="@color/black_alpha_128"
+                android:text="禁用率"/>
+
+            <View
+                android:id="@+id/view_banrate"
+                android:layout_width="15dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="62dp"
+                android:gravity="center_horizontal"
+                android:visibility="invisible"
+                android:background="@color/account_pressed_true"></View>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/_xpopup_list_divider"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/down" />
+            <TextView
+                android:id="@+id/tx_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/dark_red"
+                android:textSize="20dp"
+                android:text="6"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_red"
+                android:textSize="@dimen/font_12"
+                android:text=" th/147   "/>
+            <TextView
+                android:id="@+id/tx_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/dark_red"
+                android:textSize="20dp"
+                android:text="33.19%"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:id="@+id/tx_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_alpha_128"
+                android:textSize="@dimen/font_12"
+                android:layout_marginRight="10dp"
+                android:text="上单"/>
+            <TextView
+                android:id="@+id/tx_hero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_alpha_128"
+                android:textSize="@dimen/font_12"
+                android:text="诺克萨斯之手" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <hznu.edu.cn.android_final.ui.EchartView
+        android:id="@+id/lineChart"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center">
+
+    </hznu.edu.cn.android_final.ui.EchartView>
+
+</LinearLayout>
